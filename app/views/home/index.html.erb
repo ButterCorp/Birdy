@@ -62,7 +62,7 @@
     <div class="sh-section">
       <div class="sh-section__head">
         <a href="/profile/1" class="sh-section__avatar sh-avatar">
-          {% avatar p.id_author  %}
+          <img src="https://semantic-ui.com/images/avatar/large/joe.jpg">
         </a>
         <div>
           <%= link_to post.user.username, post.user, class:'sh-section__name' %>
@@ -76,12 +76,22 @@
                 <img src="{% static 'images/microphone-1209816_1920.jpg'%}" alt="">
             </a>
         </div>-->
+        <% if post.user_id == current_user.id %>
+
+        <p> <%= link_to 'Supprimer', post, method: :delete,
+                      data: {
+                          confirm: 'Êtes-vous sûr(e) de vouloir ce message ?'
+                      },
+                      class: 'btn btn-danger' %></p>
+
+        <% end %>
       </div>
     </div>
   <% end %>
   </div>
 
   <div class="sh-section__item col-lg-3">
+    <% @users.each do |user| %>
     <!-- {% if user.is_authenticated %} -->
     <div class="sh-section">
       <div class="sh-section__head">
@@ -90,11 +100,11 @@
             <td>
               <a href="{% url 'profile' user_all.id %}" class="sh-section__avatar2 sh-avatar">
                 <!-- <img src="{% static 'images/avatars/avatar-09.png'%}" alt=""> -->
-                {% avatar user_all.username %}
+               <img src="https://semantic-ui.com/images/avatar/large/joe.jpg">
               </a>
             </td>
             <td>
-              <a href="{% url 'profile' user_all.id %}" class="sh-section__name">{{ user_all.username }}</a>
+              <a href="{% url 'profile' user_all.id %}" class="sh-section__name"><%= user.username %></a>
             </td>
             <td>
               <div class="sh-head-user__name">
@@ -106,5 +116,6 @@
       </div>
     </div>
     <!-- {% endif %} -->
+    <% end %>
   </div>
 </div>
