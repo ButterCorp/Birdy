@@ -48,7 +48,7 @@
       <div class="sh-header">
         <div class="container">
           <h1>
-            <a href="{% url 'home' %}" class="sh-logo">
+            <a href="/" class="sh-logo">
               <%= image_tag "logo.png" %>
             </a>
           </h1>
@@ -102,11 +102,12 @@
 
           <div class="sh-header__control">
             <a href="{% url 'profile' user.id %}" class="sh-header__avatar sh-avatar">
-              <img src="https://semantic-ui.com/images/avatar/large/joe.jpg">
+              <img src="https://semantic-ui.com/images/avatar/large/joe.jpg" class="img-circle">
             </a>
           </div>
           <div class="sh-header__control">
-            <a href="#" class="sh-header__btn-upload sh-btn"><i class="icon-Comment"></i> Tweet</a>
+            <!--<a href="#" class="sh-header__btn-upload sh-btn"><i class="icon-Comment"></i> Tweet</a>!-->
+            <%= link_to "Tweet", new_post_path, class: 'sh-header__btn-upload sh-btn' %>
           </div>
           <div class="sh-header__control">
             <%= link_to 'Logout', destroy_user_session_path, method: :delete, class:'set-btn' %>

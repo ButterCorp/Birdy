@@ -2,7 +2,7 @@
   <div class="sh-head-user__content">
     <div class="sh-head-user__image">
       <a href="{% url 'avatar_change' %}">
-
+        <img src="https://semantic-ui.com/images/avatar/large/joe.jpg" class="img-circle">
       </a>
     </div>
     <div class="sh-head-user__info">
@@ -45,7 +45,7 @@
     <div class="sh-section">
       <div class="sh-section__head">
         <a href="" class="sh-section__avatar sh-avatar">
-          {% avatar p.id_author %}
+          <img src="https://semantic-ui.com/images/avatar/large/joe.jpg" class="img-circle">
         </a>
         <div>
           <%= link_to post.user.username, post.user, class:'sh-section__name' %>

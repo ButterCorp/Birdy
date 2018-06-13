@@ -5,7 +5,7 @@
     <div class="sh-section">
       <div class="sh-section__head">
         <a href="/profile/1" class="sh-section__avatar sh-avatar">
-
+          <img src="https://semantic-ui.com/images/avatar/large/joe.jpg" class="img-circle">
         </a>
         <div>
           <h2>
@@ -59,10 +59,13 @@
   </div> -->
   <div class="sh-section__item col-lg-6">
  <% @posts.each do |post| %>
+      <% if @posts.nil? %>
+        Pas encore de post :(
+      <% end %>
     <div class="sh-section">
       <div class="sh-section__head">
         <a href="/profile/1" class="sh-section__avatar sh-avatar">
-          <img src="https://semantic-ui.com/images/avatar/large/joe.jpg">
+          <img src="https://semantic-ui.com/images/avatar/large/joe.jpg" class="img-circle">
         </a>
         <div>
           <%= link_to post.user.username, post.user, class:'sh-section__name' %>
@@ -102,11 +105,11 @@
             <td>
               <a href="{% url 'profile' user_all.id %}" class="sh-section__avatar2 sh-avatar">
                 <!-- <img src="{% static 'images/avatars/avatar-09.png'%}" alt=""> -->
-               <img src="https://semantic-ui.com/images/avatar/large/joe.jpg">
+               <img src="https://semantic-ui.com/images/avatar/large/joe.jpg" class="img-circle">
               </a>
             </td>
             <td>
-              <a href="{% url 'profile' user_all.id %}" class="sh-section__name"><%= user.username %></a>
+              <%= link_to user.username, user, class:'sh-section__name' %>
             </td>
             <td>
               <div class="sh-head-user__name">
