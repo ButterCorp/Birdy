@@ -1,6 +1,7 @@
 <!-- app/views/home/index.html.erb -->
 <div class="row">
   <div class="sh-section__item col-lg-3">
+    <% if user_signed_in? %>
     <div class="sh-section">
       <div class="sh-section__head">
         <a href="/profile/1" class="sh-section__avatar sh-avatar">
@@ -8,7 +9,7 @@
         </a>
         <div>
           <h2>
-            <a href="/profile/1" class="sh-section__name">{{ user }}</a>
+            <a href="/profile/1" class="sh-section__name"><%= current_user.username %></a>
           </h2>
         </div>
       </div>
@@ -20,13 +21,14 @@
             <td><div class="sh-btn-icon"><i class="icon-Following"></i></div></td>
           </tr>
           <tr>
-            <td><div class="sh-btn-icon"><span>{{ nbpost }}</span></div></td>
-            <td><div class="sh-btn-icon"><span><a href="{% url 'followers' user.id %}">{{ nbfollower }}</a></span></div></td>
+            <td><div class="sh-btn-icon"><span><%= current_user.posts.length %></span></div></td>
+            <td><div class="sh-btn-icon"><span><a href="{% url 'followers' user.id %}"><%= current_user.relationships.length %></a></span></div></td>
             <td><div class="sh-btn-icon"><span><a href="{% url 'followeds' user.id %}">{{ nbfollowed }}</a></span></div></td>
           </tr>
         </table>
       </div>
     </div>
+      <% end %>
   </div>
 
   <!-- <div class="sh-section__item col-lg-6 ">
