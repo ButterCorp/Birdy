@@ -1,14 +1,107 @@
 <!-- app/views/home/index.html.erb -->
-<h1>
-  Ceci est la page d'accueil du projet
-  <%= Rails.application. class.parent_name %> !
+<div class="row">
+  <div class="sh-section__item col-lg-3">
+    <div class="sh-section">
+      <div class="sh-section__head">
+        <a href="/profile/1" class="sh-section__avatar sh-avatar">
 
-</h1>
-<div id="user_nav">
-  <% if user_signed_in? %>
-    Connecté en tant que <%= current_user.email %>.
-    <%= link_to 'Se déconnecter', destroy_user_session_path, method: :delete %>
-  <% else %>
-    <%= link_to 'Register', new_user_registration_path %> or <%= link_to 'Sign in', new_user_session_path %>
-  <% end %>
+        </a>
+        <div>
+          <h2>
+            <a href="/profile/1" class="sh-section__name">{{ user }}</a>
+          </h2>
+        </div>
+      </div>
+      <div class="sh-section__content sh-head-user__info-statistic">
+        <table>
+          <tr>
+            <td><div class="sh-btn-icon"><i class="icon-Comment"></i></div></td>
+            <td><div class="sh-btn-icon"><i class="icon-Followers"></i></div></td>
+            <td><div class="sh-btn-icon"><i class="icon-Following"></i></div></td>
+          </tr>
+          <tr>
+            <td><div class="sh-btn-icon"><span>{{ nbpost }}</span></div></td>
+            <td><div class="sh-btn-icon"><span><a href="{% url 'followers' user.id %}">{{ nbfollower }}</a></span></div></td>
+            <td><div class="sh-btn-icon"><span><a href="{% url 'followeds' user.id %}">{{ nbfollowed }}</a></span></div></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="sh-section__item col-lg-6 ">
+      <div class="sh-section">
+          <div class="sh-section__head">
+              <a href="single_post.html" class="sh-section__avatar sh-avatar"><img src="images/avatars/avatar-02.png" alt=""></a>
+              <div>
+                  <a href="#" class="sh-section__name">Envato_Studio</a>
+                  <span class="sh-section__passed">2 hours ago</span>
+              </div>
+              <a href="#" class="sh-section__link sh-btn-icon"><i class="icon-Link"></i></a>
+          </div>
+          <div class="sh-section__content">
+              <p>Special beta pricing's almost over, don't miss out. Head to <a href="single_post.html">http://enva.t</a> to check it out & sign up. Don’t forget o subscribe.</p>
+              <div class="sh-section__image">
+                  <a href="single_post.html"><img src="images/microphone-1209816_1920.jpg" alt=""></a>
+              </div>
+          </div>
+          <div class="sh-section__footer">
+              <a href="#" class="sh-section__btn-upvote sh-btn-icon"><i class="icon-Upvote"></i></a>
+              <a href="#" class="sh-section__btn-downvote sh-btn-icon"><i class="icon-Downvote"></i></a>
+              <a href="#" class="sh-section__btn-repost sh-btn-icon"><i class="icon-Repost"></i></a>
+              <a href="#" class="sh-section__btn-like sh-btn-icon"><i class="icon-Favorite_Full"></i><span>1,274</span></a>
+              <a href="#" class="sh-section__btn-comment sh-btn-icon"><i class="icon-Comment_Full"></i><span>982</span></a>
+              <a href="#" class="sh-section__btn-share sh-btn-icon"><i class="icon-Share"></i></a>
+          </div>
+      </div>
+  </div> -->
+
+  <div class="sh-section__item col-lg-6">
+    <div class="sh-section">
+      <div class="sh-section__head">
+        <a href="/profile/1" class="sh-section__avatar sh-avatar">
+          {% avatar p.id_author  %}
+        </a>
+        <div>
+          <a href="/profile/1" class="sh-section__name">{{ p.id_author }}</a>
+          <span class="sh-section__passed">{{ p.created_at|date:"M/d"|lower }}</span>
+        </div>
+      </div>
+      <div class="sh-section__content">
+        <p>{{ p.post_content }}</p>
+        <!--<div class="sh-section__image">
+            <a href="single_post.html">
+                <img src="{% static 'images/microphone-1209816_1920.jpg'%}" alt="">
+            </a>
+        </div>-->
+      </div>
+    </div>
+  </div>
+
+  <div class="sh-section__item col-lg-3">
+    <!-- {% if user.is_authenticated %} -->
+    <div class="sh-section">
+      <div class="sh-section__head">
+        <table>
+          <tr class="sh-suggest">
+            <td>
+              <a href="{% url 'profile' user_all.id %}" class="sh-section__avatar2 sh-avatar">
+                <!-- <img src="{% static 'images/avatars/avatar-09.png'%}" alt=""> -->
+                {% avatar user_all.username %}
+              </a>
+            </td>
+            <td>
+              <a href="{% url 'profile' user_all.id %}" class="sh-section__name">{{ user_all.username }}</a>
+            </td>
+            <td>
+              <div class="sh-head-user__name">
+                <i><img src="{% static 'fonts/icons/sharehub/svg/Verified.svg'%}" alt=""></i>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <!-- {% endif %} -->
+  </div>
 </div>
