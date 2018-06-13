@@ -22,8 +22,8 @@
           </tr>
           <tr>
             <td><div class="sh-btn-icon"><span><%= current_user.posts.length %></span></div></td>
-            <td><div class="sh-btn-icon"><span><a href="{% url 'followers' user.id %}"><%= current_user.relationships.length %></a></span></div></td>
-            <td><div class="sh-btn-icon"><span><a href="{% url 'followeds' user.id %}">{{ nbfollowed }}</a></span></div></td>
+            <td><div class="sh-btn-icon"><span><a href="{% url 'followers' user.id %}"><%= @relationship.where(follower_id: current_user.id).length %></a></span></div></td>
+            <td><div class="sh-btn-icon"><span><a href="{% url 'followeds' user.id %}"><%= @relationship.where(followed_id: current_user.id).length %></a></span></div></td>
           </tr>
         </table>
       </div>
@@ -57,20 +57,20 @@
           </div>
       </div>
   </div> -->
-
   <div class="sh-section__item col-lg-6">
+ <% @posts.each do |post| %>
     <div class="sh-section">
       <div class="sh-section__head">
         <a href="/profile/1" class="sh-section__avatar sh-avatar">
           {% avatar p.id_author  %}
         </a>
         <div>
-          <a href="/profile/1" class="sh-section__name">{{ p.id_author }}</a>
-          <span class="sh-section__passed">{{ p.created_at|date:"M/d"|lower }}</span>
+          <a href="/profile/1" class="sh-section__name"><%= post.user.username %></a>
+          <span class="sh-section__passed"><%= post.created_at %></span>
         </div>
       </div>
       <div class="sh-section__content">
-        <p>{{ p.post_content }}</p>
+        <p><%= post.description %></p>
         <!--<div class="sh-section__image">
             <a href="single_post.html">
                 <img src="{% static 'images/microphone-1209816_1920.jpg'%}" alt="">
@@ -78,6 +78,7 @@
         </div>-->
       </div>
     </div>
+  <% end %>
   </div>
 
   <div class="sh-section__item col-lg-3">
