@@ -20,10 +20,10 @@
       <div class="sh-head-user__info-statistic">
         <div class="sh-btn-icon" title="Posts"><i class="icon-Post"></i><span><%= @user.posts.length %></span></div>
         <div class="sh-btn-icon"><i class="icon-Followers"></i><span>
-          <a href="{% url 'followers' id_user %}" style="text-decoration: none;"><%#= @relationship.where(follower_id: @user.id).length %></a>
+          <a href="{% url 'followers' id_user %}" style="text-decoration: none;"><%= @relationship.where(follower_id: @user.id).length %></a>
         </span></div>
         <div class="sh-btn-icon"><i class="icon-Following"></i><span>
-          <a href="{% url 'followeds' id_user %}"><%#= @relationship.where(followed_id: @user.id).length %></a>
+          <a href="{% url 'followeds' id_user %}"><%= @relationship.where(followed_id: @user.id).length %></a>
         </span></div>
       </div>
       <p>Two fish are sitting in a tank. One looks over at the other and says: "Hey, do you know how to drive this thing?"</p>
