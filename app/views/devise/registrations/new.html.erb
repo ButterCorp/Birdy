@@ -11,7 +11,7 @@
       <div class="sh-login__content">
         <p>Sign up to Birdy</p>
         <div class="sh-login__form">
-            <input type="text" class="form-control" placeholder='Username'>
+            <%= f.text_field :username, class:'form-control', placeholder: 'Username' %>
             <br>
             <%= f.email_field :email, autofocus: true, autocomplete: "email", class:'form-control', placeholder: 'Email' %>
             <br>
@@ -30,7 +30,4 @@
       </div>
     </div>
   </main>
-
 <% end %>
-
-
