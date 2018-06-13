@@ -1,3 +1,14 @@
+@font-face {
+  font-family: 'sharehub';
+  src:  url('fonts/sharehub.eot?b5q1ef');
+  src:  url('fonts/sharehub.eot?b5q1ef#iefix') format('embedded-opentype'),
+    url('fonts/sharehub.ttf?b5q1ef') format('truetype'),
+    url('fonts/sharehub.woff?b5q1ef') format('woff'),
+    url('fonts/sharehub.svg?b5q1ef#sharehub') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
 [class^="icon-"], [class*=" icon-"] {
   /* use !important to prevent issues with browser extensions that change fonts */
   font-family: 'sharehub' !important;
