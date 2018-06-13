@@ -109,7 +109,21 @@
               </a>
             </td>
             <td>
+              <% if current_user %>
+
               <%= link_to user.username, user, class:'sh-section__name' %>
+
+              <% if user.relationships.where(follower_id: current_user.id, followed_id: user.id).any? %>
+              
+              <a href="{% url 'follow' user.id %}" class="sh-head-user__btn-follow sh-btn">Follow</a>
+              
+              <% else %>
+
+              <a href="{% url 'follow' user.id %}" class="sh-head-user__btn-follow sh-btn">UnFollow</a>
+
+              <% end %>
+
+              <% end %>
             </td>
             <td>
               <div class="sh-head-user__name">
