@@ -1,26 +1,19 @@
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
 
   <main>
-    <div class="sh-login">
-      <div class="sh-login__logo">
-        <a href="index.php" class="sh-logo">
-          <%= image_tag "Sharehub.svg" %>
-        </a>
-      </div>
-      <div class="sh-login__content">
-        <p>Sign in Birdy</p>
-        <div class="sh-login__form">
-            <%= f.text_field :login, autofocus: true, autocomplete: "email", class: 'form-control', placeholder: 'Email (or username?)' %>
-          <br>
-          <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: 'Password' %>
-            <div class="sh-input-copy">
-            </div>
-            <div class="sh-login__send">
-              <%= render "devise/shared/links" %> <br></br>
-              <%= f.submit t('.sign_in'), class:'sh-btn' %>
-            </div>
-        </div>
-      </div>
+    <div class="jumbotron">
+      <h1 class="display-4">Se connecter</h1>
+      <p class="lead">Accéder à votre réseau social préféré.</p>
+      <hr class="my-4">
+      <p>Vos amis attendent vos posts cinglants.</p>
+      <p class="lead">
+        <%= f.text_field :login, autofocus: true, autocomplete: "email", class: 'form-control', placeholder: 'Email (ou username?)' %>
+        <br>
+        <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: 'Password' %>
+        <br>
+        <%= render "devise/shared/links" %> <br>
+        <%= f.submit t('.sign_in'), class:'btn btn-primary' %>
+      </p>
     </div>
   </main>
 <% end %>

@@ -64,3 +64,13 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 #devise
 gem 'devise'
 gem  'devise-i18n'
+
+#upload image
+gem 'carrierwave',             '1.2.2'
+gem 'mini_magick',             '4.7.0'
+
+# Bootstrap
+gem 'bootstrap', '~> 4.0.0'
+
+#will paginate
+gem 'will_paginate', '>= 3.1'
