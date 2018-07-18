@@ -1,0 +1,6 @@
+
+  <%= link_to gravatar_for(current_user), current_user %>
+
+    <h5 class="card-title"><%= current_user.username %></h5>
+    <p class="card-text"><%= pluralize(current_user.posts.count, "post") %></p>
+    <%= link_to "Consulter mon profil", current_user,  class: "btn btn-primary" %>

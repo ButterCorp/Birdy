@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-  <html lang="en-US">
+  <html lang="fr-FR">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,11 +23,9 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
-    <%= stylesheet_link_tag 'style-sh', media: 'all', 'data-turbolinks-track': 'reload' %>
 
     <!-- Vendor -->
     <!-- Custom -->
-    <%= stylesheet_link_tag 'magnific-popup', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= stylesheet_link_tag 'style', media: 'all', 'data-turbolinks-track': 'reload' %>
 
     <!-- JAVA SCRIPT -->
@@ -43,117 +41,33 @@
   </head>
   <body>
   <!-- HEADER -->
-  <% if user_signed_in? %>
     <header>
-      <div class="sh-header">
-        <div class="container">
-          <h1>
-            <a href="/" class="sh-logo">
-              <%= image_tag "logo.png" %>
-            </a>
-          </h1>
-          <div class="sh-header__control">
-            <a href="#" class="sh-header__btn-notification sh-btn-icon"><i class="icon-Notification"></i></a>
-          </div>
-          <div class="sh-header__control">
-            <a href="#" class="sh-header__btn-comment sh-btn-icon"><i class="icon-Comment"></i></a>
-          </div>
-          <div class="sh-user">
-            <div class="sh-user__head">
-              <p>3 New Notifications</p>
-              <a href="#" class="sh-user__close sh-btn-icon"><i class="icon-Cancel"></i></a>
-            </div>
-            <div class="sh-user__content">
-              <div>
-                <div><a href="#">
-                  <%= image_tag "Badge_03.svg" %>
-                </a></div>
-                <div>
-                  <div>New Badge Earned</div>
-                  <span>Get 1K upvotes on your post</span>
-                </div>
-              </div>
-              <div>
-                <div><a href="#">
-                  <%= image_tag "avatar-02.png" %>
-                </a></div>
-                <div>
-                  <div>Life choices of my cat</div>
-                  <span>Earned <i class="icon-Upvote"></i> 210</span>
-                </div>
-              </div>
-            </div>
-            <div class="sh-user__footer">
-              <a href="#" class="sh-comments__avatar sh-avatar">
-                <%= image_tag "avatar-01.png" %>
-              </a>
-              <div>
-                <a href="#">bastion . </a>
-                <span>1 hour ago</span>
-                <p>Hey, how’s it going nathun?</p>
-              </div>
-            </div>
-          </div>
-          <script>
-              require(['app'], function () {
-                  require(['modules/menu']);
-              });
-          </script>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="<%= root_path %>">Où tout a commencé ....</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
 
-          <div class="sh-header__control">
-            <a href="{% url 'profile' user.id %}" class="sh-header__avatar sh-avatar">
-              <img src="https://semantic-ui.com/images/avatar/large/joe.jpg" class="img-circle">
-            </a>
-          </div>
-          <div class="sh-header__control">
-            <!--<a href="#" class="sh-header__btn-upload sh-btn"><i class="icon-Comment"></i> Tweet</a>!-->
-            <%= link_to "Tweet", new_post_path, class: 'sh-header__btn-upload sh-btn' %>
-          </div>
-          <div class="sh-header__control">
-            <%= link_to 'Logout', destroy_user_session_path, method: :delete, class:'set-btn' %>
-          </div>
-          <div class="sh-upload"> <!-- TWEET HERE -->
-            <form method="post">
-              <div class="sh-upload__head">
-                <input type="text" class="form-control ttg-border-none" name="content" placeholder="Tweetez" />
-                {% csrf_token %}
+        <div class="collapse navbar-collapse">
+            <% if user_signed_in? %>
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item"><%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'btn btn-outline-danger' %></li>
+              <li class="nav-item"><%= link_to "Users", users_path, class:'nav-link' %></li>
+            </ul>
+           <% else %>
+            <div class="form-inline  mr-auto">
+              <div class="mr-2">
+                <%= link_to 'Register', new_user_registration_path, class: 'btn btn-outline-primary' %>
               </div>
-              <div class="sh-upload__footer">
-                <input class="sh-btn" type="submit">
-              </div>
-            </form>
-          </div>
+
+              <%= link_to 'Sign in', new_user_session_path, class: 'btn btn-outline-success' %>
+            </div>
+        <% end %>
         </div>
-        <script>
-            require(['app'], function () {
-                require(['modules/main']);
-                require(['modules/upload']);
-            });
-        </script>
-      </div>
-      </div>
+      </nav>
     </header>
-    <% else %>
-    <header>
-      <div class="sh-header">
-        <div class="container">
-          <h1>
-            <a href="{% url 'home' %}" class="sh-logo">
-              <%= image_tag "logo.png" %>
-            </a>
-          </h1>
-          <div class="sh-header__control">
-            <%= link_to 'Register', new_user_registration_path, class: 'sh-btn' %>
-          </div>
-          <div class="sh-header__control">
-             <%= link_to 'Sign in', new_user_session_path, class: 'set-btn' %>
-          </div>
-        </div>
-      </div>
-      <% end %>
-
   <!-- MAIN -->
-  <div class="container" style="margin-top: 10px">
+  <div class="container" style="margin-top: 100px">
     <%= yield %>
   </div>
       <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>

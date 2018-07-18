@@ -3,31 +3,26 @@
 
 
   <main>
-    <div class="sh-login">
-      <div class="sh-login__logo">
-        <a href="#" class="sh-logo">
-          <%= image_tag "Sharehub.svg" %>
-        </a></div>
-      <div class="sh-login__content">
-        <p>Sign up to Birdy</p>
-        <div class="sh-login__form">
-            <%= f.text_field :username, class:'form-control', placeholder: 'Username' %>
-            <br>
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", class:'form-control', placeholder: 'Email' %>
-            <br>
-            <% if @minimum_password_length %>
-              <em><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></em>
-            <% end %><br/>
-            <%= f.password_field :password, autocomplete: "off", class:'form-control', placeholder: 'Password' %>
-            <br>
-            <%= f.password_field :password_confirmation, autocomplete: "off", class:'form-control', placeholder: 'Retype password' %>
-            <br>
-            <div class="sh-login__send">
-              <%= render "devise/shared/links" %>
-              <%= f.submit t('.sign_up'), class:'sh-btn' %>
-            </div>
-        </div>
-      </div>
+    <div class="jumbotron">
+      <h1 class="display-4">S'inscrire sur Birdy</h1>
+      <p class="lead">Aussi facile que plaisant.</p>
+      <hr class="my-4">
+      <p>Peu de vérifications, pas de casse-tête à mot de passes super compliqués.</p>
+      <p class="lead">
+        <%= f.text_field :username, class: 'form-control', placeholder: 'Username' %>
+        <br>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control', placeholder: 'Email' %>
+        <br>
+        <% if @minimum_password_length %>
+          <em><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></em>
+        <% end %><br/>
+        <%= f.password_field :password, autocomplete: "off", class: 'form-control', placeholder: 'Mot de passe' %>
+        <br>
+        <%= f.password_field :password_confirmation, autocomplete: "off", class: 'form-control', placeholder: 'Retapez le mot de passe' %>
+        <br>
+          <%= render "devise/shared/links" %>
+          <%= f.submit t('.sign_up'), class: 'btn btn-primary' %>
+      </p>
     </div>
   </main>
 <% end %>

@@ -1,126 +1,30 @@
-<!-- app/views/home/index.html.erb -->
-<div class="row">
-  <div class="sh-section__item col-lg-3">
-    <% if user_signed_in? %>
-    <div class="sh-section">
-      <div class="sh-section__head">
-        <a href="/profile/1" class="sh-section__avatar sh-avatar">
-          <img src="https://semantic-ui.com/images/avatar/large/joe.jpg" class="img-circle">
-        </a>
-        <div>
-          <h2>
-            <%= link_to current_user.username, current_user, class:'sh-section__name'%>
-          </h2>
+<% if user_signed_in? %>
+  <div class="row">
+    <aside class="col-md-4">
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <%= render 'partials/user_info' %>
+            <%= render 'partials/stats' %>
+          </div>
         </div>
-      </div>
-      <div class="sh-section__content sh-head-user__info-statistic">
-        <table>
-          <tr>
-            <td><div class="sh-btn-icon"><i class="icon-Comment"></i></div></td>
-            <td><div class="sh-btn-icon"><i class="icon-Followers"></i></div></td>
-            <td><div class="sh-btn-icon"><i class="icon-Following"></i></div></td>
-          </tr>
-          <tr>
-            <td><div class="sh-btn-icon"><span><%= current_user.posts.length %></span></div></td>
-            <td><div class="sh-btn-icon"><span><a href="{% url 'followers' user.id %}"><%= @relationship.where(follower_id: current_user.id).length %></a></span></div></td>
-            <td><div class="sh-btn-icon"><span><a href="{% url 'followeds' user.id %}"><%= @relationship.where(followed_id: current_user.id).length %></a></span></div></td>
-          </tr>
-        </table>
-      </div>
+      <section class="micropost_form">
+        <%= render 'partials/post_form' %>
+      </section>
+    </aside>
+    <div class="col-md-8">
+      <h3>Posts feed</h3>
+      <%= render 'partials/feed' %>
     </div>
-      <% end %>
+  </div>
+<% else %>
+  <div class="jumbotron">
+    <h1 class="display-4">Birdy!</h1>
+    <p class="lead">Un réseau social codé en Ruby on Rails, comme Twitter !</p>
+    <hr class="my-4">
+    <img src="/img/birdy.PNG" height="200", width="244">
+    <p class="lead">
+      <%= link_to "Inscris-toi!", new_user_registration_path, class: "btn btn-primary btn-lg" %>
+    </p>
   </div>
 
-  <!-- <div class="sh-section__item col-lg-6 ">
-      <div class="sh-section">
-          <div class="sh-section__head">
-              <a href="single_post.html" class="sh-section__avatar sh-avatar"><img src="images/avatars/avatar-02.png" alt=""></a>
-              <div>
-                  <a href="#" class="sh-section__name">Envato_Studio</a>
-                  <span class="sh-section__passed">2 hours ago</span>
-              </div>
-              <a href="#" class="sh-section__link sh-btn-icon"><i class="icon-Link"></i></a>
-          </div>
-          <div class="sh-section__content">
-              <p>Special beta pricing's almost over, don't miss out. Head to <a href="single_post.html">http://enva.t</a> to check it out & sign up. Don’t forget o subscribe.</p>
-              <div class="sh-section__image">
-                  <a href="single_post.html"><img src="images/microphone-1209816_1920.jpg" alt=""></a>
-              </div>
-          </div>
-          <div class="sh-section__footer">
-              <a href="#" class="sh-section__btn-upvote sh-btn-icon"><i class="icon-Upvote"></i></a>
-              <a href="#" class="sh-section__btn-downvote sh-btn-icon"><i class="icon-Downvote"></i></a>
-              <a href="#" class="sh-section__btn-repost sh-btn-icon"><i class="icon-Repost"></i></a>
-              <a href="#" class="sh-section__btn-like sh-btn-icon"><i class="icon-Favorite_Full"></i><span>1,274</span></a>
-              <a href="#" class="sh-section__btn-comment sh-btn-icon"><i class="icon-Comment_Full"></i><span>982</span></a>
-              <a href="#" class="sh-section__btn-share sh-btn-icon"><i class="icon-Share"></i></a>
-          </div>
-      </div>
-  </div> -->
-  <div class="sh-section__item col-lg-6">
- <% @posts.each do |post| %>
-      <% if @posts.nil? %>
-        Pas encore de post :(
-      <% end %>
-    <div class="sh-section">
-      <div class="sh-section__head">
-        <a href="/profile/1" class="sh-section__avatar sh-avatar">
-          <img src="https://semantic-ui.com/images/avatar/large/joe.jpg" class="img-circle">
-        </a>
-        <div>
-          <%= link_to post.user.username, post.user, class:'sh-section__name' %>
-          <span class="sh-section__passed"><%= post.created_at %></span>
-        </div>
-      </div>
-      <div class="sh-section__content">
-        <p><%= post.description %></p>
-        <!--<div class="sh-section__image">
-            <a href="single_post.html">
-                <img src="{% static 'images/microphone-1209816_1920.jpg'%}" alt="">
-            </a>
-        </div>-->
-        <% if current_user %>
-          <% if post.user_id == current_user.id %>
-
-          <p> <%= link_to 'Supprimer', post, method: :delete,
-                        data: {
-                            confirm: 'Êtes-vous sûr(e) de vouloir ce message ?'
-                        },
-                        class: 'btn btn-danger' %></p>
-
-          <% end %>
-        <% end %>
-      </div>
-    </div>
-  <% end %>
-  </div>
-
-  <div class="sh-section__item col-lg-3">
-    <% @users.each do |user| %>
-    <!-- {% if user.is_authenticated %} -->
-    <div class="sh-section">
-      <div class="sh-section__head">
-        <table>
-          <tr class="sh-suggest">
-            <td>
-              <a href="{% url 'profile' user_all.id %}" class="sh-section__avatar2 sh-avatar">
-                <!-- <img src="{% static 'images/avatars/avatar-09.png'%}" alt=""> -->
-               <img src="https://semantic-ui.com/images/avatar/large/joe.jpg" class="img-circle">
-              </a>
-            </td>
-            <td>
-              <%= link_to user.username, user, class:'sh-section__name' %>
-            </td>
-            <td>
-              <div class="sh-head-user__name">
-                <i><img src="{% static 'fonts/icons/sharehub/svg/Verified.svg'%}" alt=""></i>
-              </div>
-            </td>
-          </tr>
-        </table>
-      </div>
-    </div>
-    <!-- {% endif %} -->
-    <% end %>
-  </div>
-</div>
+<% end %>
