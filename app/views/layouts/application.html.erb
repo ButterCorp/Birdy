@@ -53,6 +53,7 @@
             <ul class="navbar-nav mr-auto">
               <li class="nav-item"><%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'btn btn-outline-danger' %></li>
               <li class="nav-item"><%= link_to "Users", users_path, class:'nav-link' %></li>
+              <li class="nav-item"><%= link_to "Settings", edit_user_path(current_user), class: 'nav-link' %></li>
             </ul>
            <% else %>
             <div class="form-inline  mr-auto">
