@@ -1,5 +1,12 @@
 <% if user_signed_in? %>
   <div class="row">
+    <% flash.each do |key, value| %>
+      <div class="<%= flash_class(key)%> alert alert-success">
+        <%= value %>
+      </div>
+    <% end %>
+  </div>
+  <div class="row">
     <aside class="col-md-4">
         <div class="card" style="width: 18rem;">
           <div class="card-body">

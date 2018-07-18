@@ -1,17 +1,17 @@
 <% @user ||= current_user %>
 <ul class="list-group list-group-flush">
-  <li class="list-group-item"><a href="<%= user_following_path(@user) %>">
+  <li class="list-group-item"><a href="<%= user_following_path(@user) %>" style="text-decoration: none">
     <strong id="following" class="stat">
       <%= @user.following.count %>
     </strong>
-    following
+    <span class="badge badge-info">following</span>
     </a>
   </li>
-  <li class="list-group-item"><a href="<%= user_followers_path(@user) %>">
+  <li class="list-group-item"><a href="<%= user_followers_path(@user) %>" style="text-decoration: none">
     <strong id="followers" class="stat">
       <%= @user.followers.count %>
     </strong>
-    followers
+    <span class="badge badge-primary">followers</span>
     </a>
   </li>
 </ul>
