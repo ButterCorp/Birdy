@@ -1,66 +1,27 @@
-<div class="sh-head-user">
-  <div class="sh-head-user__content">
-    <div class="sh-head-user__image">
-      <a href="{% url 'avatar_change' %}">
-        <img src="https://semantic-ui.com/images/avatar/large/joe.jpg" class="img-circle">
-      </a>
-    </div>
-    <div class="sh-head-user__info">
-      <div class="sh-head-user__info-head">
-        <div class="sh-head-user__name"><span><%= @user.username %></span>
-          <i><img src="fonts/icons/sharehub/svg/Verified.svg" alt=""></i>
-        </div>
-
-        <a href="{% url 'follow' user.id %}" class="sh-head-user__btn-follow sh-btn">Follow</a>
-        <!-- {% else %}
-             <a href="{% url 'follow' user.id %}" class="sh-head-user__btn-follow sh-btn">Unfollow</a>
-         {% endif %} -->
-
-      </div>
-      <div class="sh-head-user__info-statistic">
-        <div class="sh-btn-icon" title="Posts"><i class="icon-Post"></i><span><%= @user.posts.length %></span></div>
-        <div class="sh-btn-icon"><i class="icon-Followers"></i><span>
-          <a href="{% url 'followers' id_user %}" style="text-decoration: none;"><%= @relationship.where(follower_id: @user.id).length %></a>
-        </span></div>
-        <div class="sh-btn-icon"><i class="icon-Following"></i><span>
-          <a href="{% url 'followeds' id_user %}"><%= @relationship.where(followed_id: @user.id).length %></a>
-        </span></div>
-      </div>
-      <p>Two fish are sitting in a tank. One looks over at the other and says: "Hey, do you know how to drive this thing?"</p>
-    </div>
-  </div>
-</div>
-<div class="sh-content-head">
-
-</div>
-<!--sections-->
+<% provide(:title, @user.username) %>
 <div class="row">
-  <!--section-->
-  <div class="sh-section__item col-lg-3">
-
-  </div>
-
-  <div class="sh-section__item col-lg-6">
-    <% @posts.each do |post| %>
-    <div class="sh-section">
-      <div class="sh-section__head">
-        <a href="" class="sh-section__avatar sh-avatar">
-          <img src="https://semantic-ui.com/images/avatar/large/joe.jpg" class="img-circle">
-        </a>
-        <div>
-          <%= link_to post.user.username, post.user, class:'sh-section__name' %>
-          <span class="sh-section__passed"><%= post.created_at %></span>
-        </div>
-        <a href="#" class="sh-section__link sh-btn-icon"><i class="icon-Link"></i></a>
-      </div>
-      <div class="sh-section__content">
-        <p><%= post.description %></p>
-      </div>
-    </div>
+  <aside class="col-md-4">
+    <section>
+      <h1>
+        <%= gravatar_for @user %>
+        <%= @user.username %>
+      </h1>
+    </section>
+    <section class="stats">
+      <%= render 'partials/stats' %>
+    </section>
+  </aside>
+  <div class="col-md-8">
+    <% if is_current_user?(@user) %>
+    <% else %>
+      <%= render 'follow_form' if user_signed_in? %>
     <% end %>
-  </div>
-
-  <div class="sh-section__item col-lg-3">
-
+    <% if @user.posts.any? %>
+      <h3>Posts (<%= @user.posts.count %>)</h3>
+      <ol>
+        <%= render @posts %>
+      </ol>
+      <%= will_paginate @posts %>
+    <% end %>
   </div>
 </div>

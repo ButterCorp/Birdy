@@ -1,18 +1,18 @@
 <% if user_signed_in? %>
   <div class="row">
     <aside class="col-md-4">
-      <section class="user_info">
-        <%= render 'partials/user_info' %>
-      </section>
-      <section class="stats">
-        <%= render 'partials/stats' %>
-      </section>
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <%= render 'partials/user_info' %>
+            <%= render 'partials/stats' %>
+          </div>
+        </div>
       <section class="micropost_form">
         <%= render 'partials/post_form' %>
       </section>
     </aside>
     <div class="col-md-8">
-      <h3>Micropost Feed</h3>
+      <h3>Posts feed</h3>
       <%= render 'partials/feed' %>
     </div>
   </div>

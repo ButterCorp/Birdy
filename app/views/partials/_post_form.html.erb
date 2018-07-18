@@ -1,11 +1,14 @@
-<%= form_for(@micropost, html: { multipart: true }) do |f| %>
+<%= form_for(@post, html: { multipart: true }) do |f| %>
   <%= render 'partials/error_messages', object: f.object %>
-  <div class="field">
-    <%= f.text_area :content, placeholder: "Faites le buzz..." %>
+  <div class="form-group mt-5">
+    <%= f.text_area :content, placeholder: 'Faites le buzz...', rows: 5, class: 'form-control'%>
+
   </div>
-  <%= f.submit "Post", class: "btn btn-primary" %>
+  <div class="mb-3">
+    <%= f.submit "Post", class: "btn btn-primary" %>
+  </div>
   <span class="picture">
-    <%= f.file_field :picture, accept: 'image/png,image/jpeg,image/gif' %>
+    <%= f.file_field :picture, accept: 'image/png,image/jpeg,image/gif', class:'form-control-file' %>
   </span>
 <% end %>
 
