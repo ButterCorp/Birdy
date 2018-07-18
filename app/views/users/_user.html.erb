@@ -1,4 +1,6 @@
-<li>
+<div class="card mt-4" style="width: 18rem;">
   <%= gravatar_for user %>
-  <%= link_to user.username, user %>
-</li>
+  <div class="card-body">
+    <p class="card-text"><%= link_to user.username, user %></p>
+  </div>
+</div>  
