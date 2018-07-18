@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, only: %i[index, edit, update,
                                         following, followers]
+  before_action :correct_user,   only: [:edit, :update]
 
   def index
     @users = User.paginate(page: params[:page])
@@ -42,14 +43,14 @@ class UsersController < ApplicationController
 
   def following
     @title = "Following"
-    @user  = User.find(params[:id])
+    @user  = User.find(params[:user_id])
     @users = @user.following.paginate(page: params[:page])
     render 'show_follow'
   end
 
   def followers
     @title = "Followers"
-    @user  = User.find(params[:id])
+    @user  = User.find(params[:user_id])
     @users = @user.followers.paginate(page: params[:page])
     render 'show_follow'
   end
@@ -59,5 +60,11 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:username, :email, :password,
                                  :password_confirmation)
+  end
+
+  # Confirms the correct user.
+  def correct_user
+    @user = User.find(params[:id])
+    redirect_to(root_url) unless current_user?(@user)
   end
 end
